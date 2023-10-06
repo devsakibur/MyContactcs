@@ -1,4 +1,4 @@
-package com.knackpark.mycontactcs
+package com.knackpark.mycontactcs.adapter
 
 import android.view.LayoutInflater
 import android.view.View
@@ -7,6 +7,8 @@ import androidx.recyclerview.widget.RecyclerView
 
 
 import android.widget.TextView
+import com.knackpark.mycontactcs.model.Contact
+import com.knackpark.mycontactcs.R
 
 class ContactAdapter(private val contacts: List<Contact>) :
     RecyclerView.Adapter<ContactAdapter.ViewHolder>() {
@@ -38,7 +40,7 @@ class ContactAdapter(private val contacts: List<Contact>) :
         fun bind(contact: Contact) {
             // Bind contact data to UI elements
             nameTextView.text = contact.name
-            phoneNumberTextView.text = contact.phoneNumber
+            phoneNumberTextView.text = contact.number
             emailTextView.text = contact.email
         }
     }
