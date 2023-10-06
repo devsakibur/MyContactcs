@@ -3,11 +3,11 @@ package com.knackpark.mycontactcs
 import android.annotation.SuppressLint
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import android.widget.EditText
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
-import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.knackpark.mycontactcs.adapter.ContactAdapter
@@ -26,14 +26,14 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
 
-        val recyclerView = findViewById<RecyclerView>(R.id.contactRecyclerView)
-        contactAdapter = ContactAdapter(contacts)
-
+    val x = findViewById<EditText>(R.id.editTextName)
+    val y = findViewById<EditText>(R.id.editTextEmail)
+    val z = findViewById<EditText>(R.id.editTextPhoneNumber)
 
 
 
         viewModel.getAllContacts().observe(this) {
-
+            val recyclerView = findViewById<RecyclerView>(R.id.contactRecyclerView)
                 recyclerView.apply {
                 contactAdapter = ContactAdapter(it)
                 this.adapter = contactAdapter
@@ -65,8 +65,15 @@ class MainActivity : AppCompatActivity() {
                 val email = dialogView.findViewById<EditText>(R.id.editTextEmail).text.toString()
 
                 if (name.isNotBlank() && phoneNumber.isNotBlank() && email.isNotBlank()) {
-                    val newContact = Contact(1,name, phoneNumber, email)
-                    contacts.add(newContact)
+
+
+                    val data = Contact(null, name = name, number = phoneNumber , email = email)
+
+                    viewModel.addContacts(data)
+//
+//
+//                    val newContact = Contact(1,name, phoneNumber, email)
+//                    contacts.add(newContact)
                     contactAdapter.notifyDataSetChanged()
                 } else {
                     Toast.makeText(this, "Invalid input. Please check your entries.", Toast.LENGTH_SHORT).show()
@@ -85,6 +92,11 @@ class MainActivity : AppCompatActivity() {
         alertDialog.show()
 
     }
+
+
+
+
+
 
 
 }

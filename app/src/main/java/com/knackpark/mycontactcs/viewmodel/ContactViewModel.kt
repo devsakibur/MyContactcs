@@ -16,5 +16,8 @@ class ContactViewModel(application: Application) : AndroidViewModel(application)
     fun addContacts(contact : Contact){
         repository.insertContact(contact)
     }
+    fun deleteContact(contact: Contact){
+        repository.deleteContact(contact)
+    }
     fun getAllContacts() : LiveData<List<Contact>> = repository.getAllContacts()
 }
